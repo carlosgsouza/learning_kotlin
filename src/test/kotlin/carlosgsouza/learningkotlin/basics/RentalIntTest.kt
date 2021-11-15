@@ -1,8 +1,9 @@
 package carlosgsouza.learningkotlin.basics
 
 import org.junit.jupiter.api.Test
-
+import org.mockito.kotlin.*
 import org.junit.jupiter.api.Assertions.*
+import java.util.*
 
 internal class RentalIntTest {
 
@@ -42,7 +43,11 @@ internal class RentalIntTest {
 
     @Test
     fun testObserver() {
-        val observer = RentalIntObserver()
+        val observer: RentalIntObserver = mock()
+
         val rentalInt = RentalInt(5, observer)
+        rentalInt.get()
+
+        verify(observer).notify(5, 1)
     }
 }

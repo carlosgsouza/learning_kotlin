@@ -5,7 +5,7 @@ plugins {
     application
 }
 
-group = "me.carlosgsouza"
+group = "carlosgsouza"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -14,6 +14,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation("org.mockito:mockito-inline:4.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
 
 tasks.test {
