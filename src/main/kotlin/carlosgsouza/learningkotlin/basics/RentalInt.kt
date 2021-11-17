@@ -1,20 +1,11 @@
 package carlosgsouza.learningkotlin.basics
 
-fun Int.getValueAndLog() : Int {
-    println("Accessing value of $this")
-    return this
-}
+data class RentalInt(private val _value: Int, var accessCount: Int = 0, val observer: RentalIntObserver? = null) {
 
-data class RentalInt(private val value: Int, private val observer: RentalIntObserver? = null) {
-    var accessCount: Int = 0
-
-    fun get(): Int {
+    val value: Int by ReadOnlyObservable(_value) {
         accessCount++
-        observer?.notify(value, accessCount)
-        return value.getValueAndLog()
+        observer?.notify(_value, accessCount)
     }
 
-    fun getInvoice(unit: String = "USD"): String {
-        return "$$accessCount $unit"
-    }
+    fun getInvoice(unit: String = "USD"): String = "$$accessCount $unit"
 }

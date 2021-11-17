@@ -14,12 +14,12 @@ internal class RentalIntTest {
         assertEquals(0, rentalInt.accessCount)
         assertEquals(0, rentalInt.accessCount)
 
-        assertEquals(5, rentalInt.get())
+        assertEquals(5, rentalInt.value)
 
         assertEquals(1, rentalInt.accessCount)
         assertEquals(1, rentalInt.accessCount)
 
-        rentalInt.get()
+        rentalInt.value
 
         assertEquals(2, rentalInt.accessCount)
     }
@@ -32,9 +32,9 @@ internal class RentalIntTest {
         assertEquals("$0 BRL", rentalInt.getInvoice("BRL"))
         assertEquals("$0 EUR", rentalInt.getInvoice("EUR"))
 
-        rentalInt.get()
-        rentalInt.get()
-        rentalInt.get()
+        rentalInt.value
+        rentalInt.value
+        rentalInt.value
         assertEquals(3, rentalInt.accessCount)
 
         assertEquals("$3 USD", rentalInt.getInvoice())
@@ -45,8 +45,8 @@ internal class RentalIntTest {
     fun testObserver() {
         val observer: RentalIntObserver = mock()
 
-        val rentalInt = RentalInt(5, observer)
-        rentalInt.get()
+        val rentalInt = RentalInt(5, observer = observer)
+        rentalInt.value
 
         verify(observer).notify(5, 1)
     }
